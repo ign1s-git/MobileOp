@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Booking {
     private int id;
-    private mobileOp.User user;
+    private User user;
     private Number number;
     // private Plan plan;
     private mobileOp.Enums.BookingStatus bStatus;
@@ -30,55 +30,31 @@ public class Booking {
         this.bookedAt = bookedAt;
     }
 
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public void setId(int id) { this.id = id; }
 
-    public User getUser() {
-        return user;
-    }
+    public User getUser() { return user; }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+    public void setUser(User user) { this.user = user; }
 
-    public Number getNumber() {
-        return number;
-    }
+    public Number getNumber() { return number; }
 
-    public void setNumber(Number number) {
-        this.number = number;
-    }
+    public void setNumber(Number number) { this.number = number; }
 
     //    public Plan getPlan() { return plan; }
     //
     //    public void setPlan(Plan plan) { this.plan = plan; }
 
-    public mobileOp.Enums.BookingStatus getbStatus() {
-        return bStatus;
-    }
+    public mobileOp.Enums.BookingStatus getbStatus() { return bStatus; }
 
-    public void setbStatus(mobileOp.Enums.BookingStatus bStatus) {
-        this.bStatus = bStatus;
-    }
+    public void setbStatus(mobileOp.Enums.BookingStatus bStatus) { this.bStatus = bStatus; }
 
-    public LocalDate getBookedAt() {
-        return bookedAt;
-    }
+    public LocalDate getBookedAt() { return bookedAt; }
 
-    public void setBookedAt(LocalDate bookedAt) {
-        this.bookedAt = bookedAt;
-    }
+    public void setBookedAt(LocalDate bookedAt) { this.bookedAt = bookedAt; }
 
-    public LocalDate getExpiresAt() {
-        return expiresAt;
-    }
+    public LocalDate getExpiresAt() { return expiresAt; }
 
-    public void setExpiresAt(LocalDate expiresAt) {
-        this.expiresAt = expiresAt;
-    }
+    public void setExpiresAt(LocalDate expiresAt) { this.expiresAt = expiresAt; }
 }
