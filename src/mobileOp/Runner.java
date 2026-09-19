@@ -7,29 +7,24 @@ import java.util.ArrayList;
 
 public class Runner {
     public static void main(String[] args) {
-        int counter = 1;
 
-        // Создаём номера
-        mobileOp.Number number1 = new mobileOp.Number(123456, Status.Free, NumberType.Standard);
-        mobileOp.Number number2 = new Number(789012, Status.Free, NumberType.Premium);
+        BookingService bookingService = new BookingService();
+        UserService userService = new UserService();
+        Number number1 = new Number("98989899", Status.FREE, NumberType.STANDARD);
+        Number number2 = new Number("98921129", Status.FREE, NumberType.PREMIUM);
+        Number number3 = new Number("9922882", Status.FREE, NumberType.PREMIUM);
 
-        // Создаём пользователя
-        User user = new User("Иван", 12345, new ArrayList<>(), new ArrayList<>());
+        User user = userService.createUser("Lily", "AA12345");
+        User user1 = userService.createUser("Bob", "AA55271");
+        bookingService.bookingNumber(number2,user1);
+        bookingService.bookingNumber(number3,user);
+        bookingService.bookingNumber(number1,user);
 
-        // Бронируем номера
-        user.bookingNumber(number1, counter++);
-        user.bookingNumber(number2, counter++);
+        bookingService.cancelRequest(1,1);
 
-        // Выводим результаты
-        System.out.println("Пользователь: " + user.getName());
-        System.out.println("Количество номеров: " + user.getNumbers().size());
-        System.out.println("Количество бронирований: " + user.getBookingRequests().size());
-
-        // Выводим ID бронирований
-        for (Booking booking : user.getBookingRequests()) {
-            System.out.println("Booking ID: " + booking.getId());
-        }
+        System.out.println(user.getAllRequests());
+//        System.out.println(user1.getAllRequests());
+//        System.out.println(bookingService.getAllBookings().size());
+//        System.out.println("\n");
     }
-
-
 }

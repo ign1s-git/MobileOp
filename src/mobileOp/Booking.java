@@ -1,5 +1,7 @@
 package mobileOp;
 
+import mobileOp.Enums.BookingStatus;
+
 import java.time.LocalDate;
 
 public class Booking {
@@ -7,11 +9,11 @@ public class Booking {
     private User user;
     private Number number;
     // private Plan plan;
-    private mobileOp.Enums.BookingStatus bStatus;
+    private BookingStatus bStatus;
     private LocalDate bookedAt;
     private LocalDate expiresAt;
 
-    public Booking(int id, User user, Number number, mobileOp.Enums.BookingStatus bStatus, LocalDate bookedAt, LocalDate expiresAt) {
+    public Booking(int id, User user, Number number, BookingStatus bStatus, LocalDate bookedAt, LocalDate expiresAt) {
         this.id = id;
         this.user = user;
         this.number = number;
@@ -28,6 +30,12 @@ public class Booking {
         // this.plan = plan;
         this.bStatus = bStatus;
         this.bookedAt = bookedAt;
+    }
+    @Override
+    public String toString() {
+        return "Booking Id: " + id + ", User: " + user.getName() + ", User id: " + user.getId() +
+                ", Number: " + number.getNumber() + ", Status: " + bStatus +
+                ", Date: " + bookedAt;
     }
 
     public int getId() { return id; }

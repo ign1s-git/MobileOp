@@ -3,20 +3,20 @@ import mobileOp.Enums.Status;
 import mobileOp.Enums.NumberType;
 
 public class Number {
-    private int number;
+    private String number;
     private Status status ;
     private NumberType numberType;
 
-    public Number(int number, Status status, NumberType numberType) {
+    public Number(String number, Status status, NumberType numberType) {
         this.number = number;
         this.status = status;
         this.numberType = numberType;
     }
 
 
-    public int getNumber() { return number;}
+    public String getNumber() { return number;}
 
-    public void setNumber(int number) { this.number = number;}
+    public void setNumber(String number) { this.number = number;}
 
     public Status getStatus() { return status; }
 
