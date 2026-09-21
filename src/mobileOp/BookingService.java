@@ -36,17 +36,12 @@ public class BookingService {
         Booking booking = findBookingById(bookingId);
         User user = userService.findUserById(userId);
         LocalDate now = LocalDate.now();
-        if (ChronoUnit.DAYS.between(booking.getBookedAt(), now)
-                >= 3) {
+        if (ChronoUnit.DAYS.between(booking.getBookedAt(), now) >= booking.getDayCounts()) {
             user.getBookingRequests().remove(booking);
         }
     }
 
     public List<Booking> getAllBookings() {
-        List<Booking> result = new ArrayList<>();
-        for (Booking b : allBookings) {
-            result.add(b);
-        }
-        return result;
+        return this.allBookings;
     }
 }

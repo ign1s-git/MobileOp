@@ -2,6 +2,8 @@ package mobileOp;
 
 import mobileOp.Enums.BookingStatus;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,13 +30,30 @@ public class User {
         this.bookingRequests = new ArrayList<>();;
     }
 
-    public List<Booking> getAllRequests() {
-        List<Booking> result = new ArrayList<>();
-        for (Booking b : this.getBookingRequests()) {
-            result.add(b);
-            System.out.println(b.getId());
+    public void cancelUserRequest(int bookingId) {
+        Booking booking = findBookingById(bookingId);
+        getBookingRequests().remove(booking);
+    }
+
+    public Booking findBookingById(int bookingId){
+        List<Booking> bookings = getBookingRequests();
+        for (Booking b : bookings) {
+            if(b.getId() == bookingId){
+                return b;
+            }
         }
-        return result;
+        return null;
+    }
+
+    public boolean changePlan (String number, Plan plan){
+        for (Number n : this.numbers) {
+            if (n.getNumber().equals(number)){
+                plan.setStartDate(LocalDateTime.now());
+                n.setPlan(plan);
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

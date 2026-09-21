@@ -8,16 +8,15 @@ public class Booking {
     private int id;
     private User user;
     private Number number;
-    // private Plan plan;
     private BookingStatus bStatus;
     private LocalDate bookedAt;
     private LocalDate expiresAt;
+    private int dayCounts = 3;
 
     public Booking(int id, User user, Number number, BookingStatus bStatus, LocalDate bookedAt, LocalDate expiresAt) {
         this.id = id;
         this.user = user;
         this.number = number;
-        // this.plan = plan;
         this.bStatus = bStatus;
         this.bookedAt = bookedAt;
         this.expiresAt = expiresAt;
@@ -27,7 +26,6 @@ public class Booking {
         this.id = id;
         this.user = user;
         this.number = number;
-        // this.plan = plan;
         this.bStatus = bStatus;
         this.bookedAt = bookedAt;
     }
@@ -36,6 +34,11 @@ public class Booking {
         return "Booking Id: " + id + ", User: " + user.getName() + ", User id: " + user.getId() +
                 ", Number: " + number.getNumber() + ", Status: " + bStatus +
                 ", Date: " + bookedAt;
+    }
+
+    public boolean bookingRenewal(int days){
+        this.dayCounts += days;
+        return true;
     }
 
     public int getId() { return id; }
@@ -50,10 +53,6 @@ public class Booking {
 
     public void setNumber(Number number) { this.number = number; }
 
-    //    public Plan getPlan() { return plan; }
-    //
-    //    public void setPlan(Plan plan) { this.plan = plan; }
-
     public mobileOp.Enums.BookingStatus getbStatus() { return bStatus; }
 
     public void setbStatus(mobileOp.Enums.BookingStatus bStatus) { this.bStatus = bStatus; }
@@ -65,4 +64,8 @@ public class Booking {
     public LocalDate getExpiresAt() { return expiresAt; }
 
     public void setExpiresAt(LocalDate expiresAt) { this.expiresAt = expiresAt; }
+
+    public int getDayCounts() { return dayCounts; }
+
+    public void setDayCounts(int dayCounts) { this.dayCounts = dayCounts; }
 }

@@ -11,12 +11,12 @@ public class Plan {
     private int payment;
     private int dayCount;
 
-    public Plan(PlanType type, LocalDateTime startDate, int Payment, int DayCount) {
+    public Plan(PlanType type, LocalDateTime startDate, int payment, int dayCount) {
         this.type = type;
         this.startDate = startDate;
-        this.endDate = startDate.plusDays(DayCount) ;
-        this.payment = Payment;
-        this.dayCount = DayCount;
+        this.endDate = startDate.plusDays(dayCount) ;
+        this.payment = payment;
+        this.dayCount = dayCount;
     }
 
     public PlanType getType() { return type; }
