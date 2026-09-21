@@ -1,5 +1,5 @@
 package mobileOp.Enums;
 
 public enum PlanType {
-    Standard, Gold, Premium
+    DEFAULT,STANDARD, GOLD, PREMIUM
 }

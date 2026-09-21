@@ -1,5 +1,5 @@
 package mobileOp.Enums;
 
 public enum Status {
-    Free,Taken
+    FREE, TAKEN
 }
