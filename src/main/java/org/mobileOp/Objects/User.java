@@ -57,6 +57,14 @@ public class User {
         return false;
     }
 
+    public boolean addNumber(Number number){
+        if (this.numbers.size() <= 3){
+            this.numbers.add(number);
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
         return "Name: " + name + ", Numbers: " + numbers.size() + ", Booking requests: " + bookingRequests.size();

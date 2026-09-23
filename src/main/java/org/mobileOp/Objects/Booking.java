@@ -5,13 +5,15 @@ import java.time.LocalDate;
 
 @Data
 public class Booking {
+    public static final int DEFAULT_BOOKING_DAYS = 3;
+
     private int id;
     private User user;
     private Number number;
     private BookingStatus bookingStatus;
     private LocalDate bookedAt;
     private LocalDate expiresAt;
-    private int dayCounts = 3;
+    private int extensionDays = 0;
 
     public Booking(int id, User user, Number number, BookingStatus bookingStatus, LocalDate bookedAt, LocalDate expiresAt) {
         this.id = id;
@@ -37,7 +39,11 @@ public class Booking {
     }
 
     public boolean bookingRenewal(int days){
-        this.dayCounts += days;
-        return true;
+        if(this.bookingStatus != BookingStatus.COMPLETED) {
+            this.extensionDays = days;
+            return true;
+        }
+        return false;
     }
+
 }

@@ -12,6 +12,7 @@ import java.util.List;
 public class NumberService {
     private final List<Number> allNumbers = new ArrayList<>();
 
+    public NumberService (List<Number> allNumbers){ this.allNumbers = allNumbers;}
     public NumberService(){}
 
     public Number createNumber (String number, Status status, NumberType numberType){
