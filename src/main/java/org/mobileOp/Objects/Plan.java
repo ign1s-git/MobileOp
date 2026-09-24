@@ -1,7 +1,7 @@
 package org.mobileOp.Objects;
 
 import lombok.Data;
-import org.mobileOp.Enums.PlanType;
+import org.mobileOp.enums.PlanType;
 
 import java.time.LocalDateTime;
 

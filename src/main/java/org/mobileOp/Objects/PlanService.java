@@ -1,6 +1,7 @@
 package org.mobileOp.Objects;
 
-import org.mobileOp.Enums.PlanType;
+import lombok.AllArgsConstructor;
+import org.mobileOp.enums.PlanType;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -8,8 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class PlanService {
-    private final List<Plan> plans = new ArrayList<>();
+    private List<Plan> plans = new ArrayList<>();
 
     public PlanService(){
         this.plans.add(new Plan(PlanType.STANDARD, LocalDateTime.now(),50,30));

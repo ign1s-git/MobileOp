@@ -1,12 +1,11 @@
 package org.mobileOp.Objects;
 import lombok.Data;
-import org.mobileOp.Enums.BookingStatus;
+import org.mobileOp.enums.BookingStatus;
 import java.time.LocalDate;
 
 @Data
 public class Booking {
     public static final int DEFAULT_BOOKING_DAYS = 3;
-
     private int id;
     private User user;
     private Number number;

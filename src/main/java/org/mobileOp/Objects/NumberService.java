@@ -1,19 +1,20 @@
 package org.mobileOp.Objects;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.mobileOp.Enums.NumberType;
-import org.mobileOp.Enums.Status;
+import lombok.NoArgsConstructor;
+import org.mobileOp.enums.NumberType;
+import org.mobileOp.enums.Status;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Service
+@AllArgsConstructor
+@NoArgsConstructor
 public class NumberService {
-    private final List<Number> allNumbers = new ArrayList<>();
-
-    public NumberService (List<Number> allNumbers){ this.allNumbers = allNumbers;}
-    public NumberService(){}
+    private List<Number> allNumbers = new ArrayList<>();
 
     public Number createNumber (String number, Status status, NumberType numberType){
         Number newNumber = new Number( number, status, numberType);

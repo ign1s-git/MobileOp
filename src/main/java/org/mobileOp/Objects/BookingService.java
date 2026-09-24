@@ -1,8 +1,7 @@
 package org.mobileOp.Objects;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.mobileOp.Enums.BookingStatus;
+import org.mobileOp.enums.BookingStatus;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -14,9 +13,6 @@ import java.util.List;
 public class BookingService {
     private final List<Booking> allBookings = new ArrayList<>();
     private final UserService userService;
-
-    public BookingService() {
-    }
 
     public void bookingNumber(Number number, User user) {
         if (user.getBookingRequests().size() < 10) {
@@ -36,7 +32,7 @@ public class BookingService {
         return null;
     }
 
-    public void cancelRequest(int bookingId, int userId, UserService userService) {
+    public void cancelRequest(int bookingId, int userId) {
         Booking booking = findBookingById(bookingId);
         User user = userService.findUserById(userId);
         LocalDate now = LocalDate.now();
@@ -53,7 +49,5 @@ public class BookingService {
         return false;
     }
 
-    public List<Booking> getAllBookings() {
-        return this.allBookings;
-    }
+    public List<Booking> getAllBookings() { return this.allBookings; }
 }

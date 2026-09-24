@@ -1,4 +1,4 @@
-package org.mobileOp.Enums;
+package org.mobileOp.enums;
 
 public enum NumberType {
     STANDARD, PREMIUM

@@ -1,8 +1,8 @@
 package org.mobileOp.Objects;
 import lombok.Data;
-import org.mobileOp.Enums.PlanType;
-import org.mobileOp.Enums.Status;
-import org.mobileOp.Enums.NumberType;
+import org.mobileOp.enums.PlanType;
+import org.mobileOp.enums.Status;
+import org.mobileOp.enums.NumberType;
 
 import java.time.LocalDateTime;
 
