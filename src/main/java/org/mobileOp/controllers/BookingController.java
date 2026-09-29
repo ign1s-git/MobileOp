@@ -27,10 +27,10 @@ public class BookingController {
         return bookingService.findBookingById(id);
     }
 
-    @DeleteMapping("/{bookingId}/user/{userId}")
-    public void cancelRequest(@PathVariable Long bookingId, @PathVariable Long userId) {
-            bookingService.cancelRequest(bookingId, userId);
-    }
+//    @DeleteMapping("/{bookingId}/user/{userId}")
+//    public void cancelRequest(@PathVariable Long bookingId, @PathVariable Long userId) {
+//            bookingService.cancelRequest(bookingId, userId);
+//    }
 
     @PostMapping("/number/{numberStr}/user/{userId}")
     public String bookingNumber(@PathVariable("numberStr") String numberStr, @PathVariable("userId") Long userId) {
@@ -38,11 +38,12 @@ public class BookingController {
         Number number = numberService.getNumberByNumber(numberStr);
         if (user != null && number != null) {
             bookingService.bookingNumber(number, user);
+            return "Booking is created!";
         }
-        return "Booking is created!";
+        return "Booking is not created!";
     }
 
-    @PutMapping("/user/{userId}/booking/{bookingId}")
+    @PutMapping("/{bookingId}/user/{userId}")
     public String completeBooking(@PathVariable("userId") Long userId, @PathVariable("bookingId") Long bookingId){
         User user = userService.findUserById(userId);
         Booking booking = bookingService.findBookingById(bookingId);
@@ -55,7 +56,7 @@ public class BookingController {
         return "Booking is completed!";
     }
 
-    @PutMapping("/{bookingId}")
+    @PutMapping("/{bookingId}/{days}")
     public String bookingRenewal(@PathVariable ("bookingId") Long bookingId, @PathVariable ("days") int days) {
         bookingService.bookingRenew(bookingId,days);
         if (!bookingService.bookingRenew(bookingId,days)){

@@ -23,13 +23,18 @@ public class NumberController {
     }
 
     @GetMapping("/free")
-    public List<Number> freeNumbers (){
-        return numberService.freeNumbers();
+    public List<Number> getFreeNumbers (){
+        return numberService.getFreeNumbers();
     }
 
     @PostMapping
     public Number createNumber(@RequestBody Number number) {
         return numberService.createNumber(number.getNumber(), number.getStatus(), number.getNumberType());
+    }
+
+    @DeleteMapping("/{number}")
+    public void deleteNumber(@PathVariable String number){
+        numberService.deleteNumber(number);
     }
 
 }

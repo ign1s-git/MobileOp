@@ -20,7 +20,7 @@ public class NumberService {
         return newNumber;
     }
 
-    public List<Number> freeNumbers() {
+    public List<Number> getFreeNumbers() {
         List<Number> freeNums = new ArrayList<>();
         for (Number n : allNumbers) {
             if (n.getStatus() == Status.FREE) {
@@ -38,6 +38,11 @@ public class NumberService {
             }
         }
         return null;
+    }
+
+    public void deleteNumber(String number){
+        Number number1 = getNumberByNumber(number);
+         this.allNumbers.remove(number1);
     }
 
     public List<Number> getAllNumbers() {

@@ -30,7 +30,7 @@ public class Runner {
         bookingService.bookingNumber(number1, user);
 
         System.out.println("User booking requests: " + user.getBookingRequests());
-        System.out.println("Free numbers: " + numberService.freeNumbers());
+        System.out.println("Free numbers: " + numberService.getFreeNumbers());
 
         context.close();
     }
