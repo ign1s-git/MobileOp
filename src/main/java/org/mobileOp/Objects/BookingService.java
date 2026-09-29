@@ -1,5 +1,6 @@
 package org.mobileOp.Objects;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.mobileOp.enums.BookingStatus;
 import org.springframework.stereotype.Service;
@@ -11,28 +12,28 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class BookingService {
+    @Getter
     private final List<Booking> allBookings = new ArrayList<>();
     private final UserService userService;
 
     public void bookingNumber(Number number, User user) {
         if (user.getBookingRequests().size() < 10) {
-            Booking bookingsRequests = new Booking(user.getBookingRequests().size() + 1, user, number, BookingStatus.IN_PROGRESS, LocalDate.now());
+            Booking bookingsRequests = new Booking((long)user.getBookingRequests().size() + 1, user, number, BookingStatus.IN_PROGRESS, LocalDate.now());
             user.getBookingRequests().add(bookingsRequests);
             allBookings.add(bookingsRequests);
         }
     }
 
-    public Booking findBookingById(int bookingId){
-        List<Booking> bookings = getAllBookings();
-        for (Booking b : bookings) {
-            if(b.getId() == bookingId){
+    public Booking findBookingById(Long bookingId){
+        for (Booking b : this.allBookings) {
+            if(b.getId().equals(bookingId)){
                 return b;
             }
         }
         return null;
     }
 
-    public void cancelRequest(int bookingId, int userId) {
+    public void cancelRequest(Long bookingId, Long userId) {
         Booking booking = findBookingById(bookingId);
         User user = userService.findUserById(userId);
         LocalDate now = LocalDate.now();
@@ -49,5 +50,18 @@ public class BookingService {
         return false;
     }
 
-    public List<Booking> getAllBookings() { return this.allBookings; }
+    public boolean bookingRenew(Long bookingId, int days){
+        Booking booking = findBookingById(bookingId);
+        if (booking != null) {
+            booking.bookingRenewal(days);
+            return true;
+        }
+        return false;
+    }
+
+    public String getAllBookingsInfo() {
+
+        return allBookings.toString();
+    }
+
 }

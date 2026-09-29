@@ -1,12 +1,15 @@
 package org.mobileOp.Objects;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.mobileOp.enums.BookingStatus;
 import java.time.LocalDate;
 
 @Data
+@NoArgsConstructor
 public class Booking {
     public static final int DEFAULT_BOOKING_DAYS = 3;
-    private int id;
+    private Long id;
     private User user;
     private Number number;
     private BookingStatus bookingStatus;
@@ -14,7 +17,7 @@ public class Booking {
     private LocalDate expiresAt;
     private int extensionDays = 0;
 
-    public Booking(int id, User user, Number number, BookingStatus bookingStatus, LocalDate bookedAt, LocalDate expiresAt) {
+    public Booking(Long id, User user, Number number, BookingStatus bookingStatus, LocalDate bookedAt, LocalDate expiresAt) {
         this.id = id;
         this.user = user;
         this.number = number;
@@ -23,7 +26,7 @@ public class Booking {
         this.expiresAt = expiresAt;
     }
 
-    public Booking(int id, User user, Number number, BookingStatus bookingStatus, LocalDate bookedAt) {
+    public Booking(Long id, User user, Number number, BookingStatus bookingStatus, LocalDate bookedAt) {
         this.id = id;
         this.user = user;
         this.number = number;

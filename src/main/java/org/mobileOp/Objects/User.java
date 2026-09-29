@@ -1,21 +1,25 @@
 package org.mobileOp.Objects;
-import lombok.Getter;
-import lombok.Setter;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.mobileOp.enums.BookingStatus;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class User {
-    private int id;
+    private Long id;
     private String passportData;
     private String name;
-    private List<org.mobileOp.Objects.Number> numbers;
+    private List<Number> numbers;
     private List<Booking> bookingRequests;
 
-    public User(int id, String name, String passportData, List<org.mobileOp.Objects.Number> numbers, List<Booking> bookingsRequests) {
+    public User(Long id, String name, String passportData, List<org.mobileOp.Objects.Number> numbers, List<Booking> bookingsRequests) {
         this.id = id;
         this.name = name;
         this.passportData = passportData;
@@ -23,7 +27,7 @@ public class User {
         this.bookingRequests = bookingsRequests;
     }
 
-    public User(int id,String name, String passportData) {
+    public User(Long id,String name, String passportData) {
         this.id = id;
         this.name = name;
         this.passportData = passportData;
@@ -31,15 +35,15 @@ public class User {
         this.bookingRequests = new ArrayList<>();
     }
 
-    public void cancelUserRequest(int bookingId) {
+    public void cancelUserBooking(Long bookingId) {
         Booking booking = findBookingById(bookingId);
-        getBookingRequests().remove(booking);
+        booking.setBookingStatus(BookingStatus.CANCELLED);
     }
 
-    public Booking findBookingById(int bookingId){
+    public Booking findBookingById(Long bookingId){
         List<Booking> bookings = getBookingRequests();
         for (Booking b : bookings) {
-            if(b.getId() == bookingId){
+            if(b.getId().equals(bookingId)){
                 return b;
             }
         }
@@ -64,6 +68,14 @@ public class User {
         }
         return false;
     }
+
+    public void removeNumber(Number number) {
+
+        this.numbers.remove(number);
+    }
+
+
+
 
     @Override
     public String toString() {
