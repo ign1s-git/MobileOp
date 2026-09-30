@@ -3,6 +3,8 @@ package org.mobileOp.Objects;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.mobileOp.enums.BookingStatus;
+import org.mobileOp.repositories.BookingRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -12,6 +14,10 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class BookingService {
+
+    @Autowired
+    private BookingRepository bookingRepository;
+
     @Getter
     private final List<Booking> allBookings = new ArrayList<>();
     private final UserService userService;

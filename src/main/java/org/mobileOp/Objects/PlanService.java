@@ -2,6 +2,8 @@ package org.mobileOp.Objects;
 
 import lombok.AllArgsConstructor;
 import org.mobileOp.enums.PlanType;
+import org.mobileOp.repositories.PlanRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -11,6 +13,10 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class PlanService {
+
+    @Autowired
+    private PlanRepository planRepository;
+
     private List<Plan> plans = new ArrayList<>();
 
     public PlanService(){

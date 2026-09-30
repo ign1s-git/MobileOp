@@ -1,5 +1,6 @@
 package org.mobileOp.Objects;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,15 +10,28 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "users") // В PostgreSQL слово 'user' зарезервировано, поэтому имя таблицы 'users'
 @Getter
 @Setter
 @NoArgsConstructor
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "passport_data")
     private String passportData;
+
+    @Column(name = "name")
     private String name;
-    private List<Number> numbers;
-    private List<Booking> bookingRequests;
+
+    @Transient
+    private List<Number> numbers = new ArrayList<>();
+
+    @Transient
+    private List<Booking> bookingRequests = new ArrayList<>();
 
     public User(Long id, String name, String passportData, List<org.mobileOp.Objects.Number> numbers, List<Booking> bookingsRequests) {
         this.id = id;

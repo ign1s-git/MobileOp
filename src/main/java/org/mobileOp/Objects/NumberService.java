@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.mobileOp.enums.NumberType;
 import org.mobileOp.enums.Status;
+import org.mobileOp.repositories.NumberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +14,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class NumberService {
+
+    @Autowired
+    private NumberRepository numberRepository;
+
     private List<Number> allNumbers = new ArrayList<>();
 
     public Number createNumber(String number, Status status, NumberType numberType) {

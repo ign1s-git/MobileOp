@@ -1,11 +1,9 @@
 package org.mobileOp.controllers;
 
 import org.mobileOp.Objects.*;
+import org.mobileOp.Objects.Number;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import org.mobileOp.Objects.Number;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/bookings")
@@ -27,10 +25,11 @@ public class BookingController {
         return bookingService.findBookingById(id);
     }
 
-//    @DeleteMapping("/{bookingId}/user/{userId}")
-//    public void cancelRequest(@PathVariable Long bookingId, @PathVariable Long userId) {
-//            bookingService.cancelRequest(bookingId, userId);
-//    }
+    // @DeleteMapping("/{bookingId}/user/{userId}")
+    // public void cancelRequest(@PathVariable Long bookingId, @PathVariable Long
+    // userId) {
+    // bookingService.cancelRequest(bookingId, userId);
+    // }
 
     @PostMapping("/number/{numberStr}/user/{userId}")
     public String bookingNumber(@PathVariable("numberStr") String numberStr, @PathVariable("userId") Long userId) {
@@ -44,12 +43,12 @@ public class BookingController {
     }
 
     @PutMapping("/{bookingId}/user/{userId}")
-    public String completeBooking(@PathVariable("userId") Long userId, @PathVariable("bookingId") Long bookingId){
+    public String completeBooking(@PathVariable("userId") Long userId, @PathVariable("bookingId") Long bookingId) {
         User user = userService.findUserById(userId);
         Booking booking = bookingService.findBookingById(bookingId);
-        if (user != null && booking != null){
+        if (user != null && booking != null) {
             bookingService.completeBooking(booking, user);
-            if(!bookingService.completeBooking(booking, user)){
+            if (!bookingService.completeBooking(booking, user)) {
                 return "Booking is not completed!";
             }
         }
@@ -57,9 +56,9 @@ public class BookingController {
     }
 
     @PutMapping("/{bookingId}/{days}")
-    public String bookingRenewal(@PathVariable ("bookingId") Long bookingId, @PathVariable ("days") int days) {
-        bookingService.bookingRenew(bookingId,days);
-        if (!bookingService.bookingRenew(bookingId,days)){
+    public String bookingRenewal(@PathVariable("bookingId") Long bookingId, @PathVariable("days") int days) {
+        bookingService.bookingRenew(bookingId, days);
+        if (!bookingService.bookingRenew(bookingId, days)) {
             return "Booking is not renewed!";
         }
         return "Booking is renewed!";

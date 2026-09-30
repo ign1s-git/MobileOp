@@ -1,22 +1,43 @@
 package org.mobileOp.Objects;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.mobileOp.enums.BookingStatus;
+
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "bookings")
 @Data
 @NoArgsConstructor
 public class Booking {
+
+    @Column(name = "default_booking_days")
     public static final int DEFAULT_BOOKING_DAYS = 3;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @JsonIgnoreProperties("bookingRequests")
+    @OneToOne
+    @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToOne
+    @JoinColumn(name = "number_id")
     private Number number;
+
+    @Column(name = "booking_status")
     private BookingStatus bookingStatus;
+
+    @Column(name = "booked_at")
     private LocalDate bookedAt;
+
+    @Column(name = "expires_at")
     private LocalDate expiresAt;
+
+    @Column(name = "extension_days")
     private int extensionDays = 0;
 
     public Booking(Long id, User user, Number number, BookingStatus bookingStatus, LocalDate bookedAt, LocalDate expiresAt) {
