@@ -2,6 +2,9 @@ package org.mobileOp.controllers;
 
 import org.mobileOp.Objects.*;
 import org.mobileOp.Objects.Number;
+import org.mobileOp.services.BookingService;
+import org.mobileOp.services.NumberService;
+import org.mobileOp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,7 +51,7 @@ public class BookingController {
         Booking booking = bookingService.findBookingById(bookingId);
         if (user != null && booking != null) {
             bookingService.completeBooking(booking, user);
-            if (!bookingService.completeBooking(booking, user)) {
+            if (bookingService.completeBooking(booking, user) == null) {
                 return "Booking is not completed!";
             }
         }
@@ -58,7 +61,7 @@ public class BookingController {
     @PutMapping("/{bookingId}/{days}")
     public String bookingRenewal(@PathVariable("bookingId") Long bookingId, @PathVariable("days") int days) {
         bookingService.bookingRenew(bookingId, days);
-        if (!bookingService.bookingRenew(bookingId, days)) {
+        if (bookingService.bookingRenew(bookingId, days) == null) {
             return "Booking is not renewed!";
         }
         return "Booking is renewed!";

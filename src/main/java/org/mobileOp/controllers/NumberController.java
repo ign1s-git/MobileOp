@@ -1,6 +1,6 @@
 package org.mobileOp.controllers;
 
-import org.mobileOp.Objects.NumberService;
+import org.mobileOp.services.NumberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.mobileOp.Objects.Number;

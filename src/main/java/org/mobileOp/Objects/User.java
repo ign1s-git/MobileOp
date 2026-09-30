@@ -27,10 +27,10 @@ public class User {
     @Column(name = "name")
     private String name;
 
-    @Transient
+    @OneToMany
     private List<Number> numbers = new ArrayList<>();
 
-    @Transient
+    @OneToMany(mappedBy = "user")
     private List<Booking> bookingRequests = new ArrayList<>();
 
     public User(Long id, String name, String passportData, List<org.mobileOp.Objects.Number> numbers, List<Booking> bookingsRequests) {

@@ -17,10 +17,10 @@ public class Booking {
     public static final int DEFAULT_BOOKING_DAYS = 3;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @JsonIgnoreProperties("bookingRequests")
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 

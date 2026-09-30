@@ -36,8 +36,7 @@ public class Plan {
     @Column(name = "day_count")
     private int dayCount;
 
-    public Plan(Long id,PlanType type, LocalDateTime startDate, int payment, int dayCount) {
-        this.id = id;
+    public Plan(PlanType type, LocalDateTime startDate, int payment, int dayCount) {
         this.type = type;
         this.startDate = startDate;
         this.endDate = startDate.plusDays(dayCount);

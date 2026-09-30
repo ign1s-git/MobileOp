@@ -1,5 +1,7 @@
-package org.mobileOp.Objects;
+package org.mobileOp.services;
 
+import org.mobileOp.Objects.Number;
+import org.mobileOp.Objects.User;
 import org.mobileOp.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
