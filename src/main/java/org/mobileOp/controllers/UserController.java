@@ -2,6 +2,7 @@ package org.mobileOp.controllers;
 
 import org.mobileOp.Objects.*;
 import org.mobileOp.Objects.Number;
+import org.mobileOp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -14,8 +15,8 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    public List<User> getAllUsers(){
-        return userService.getAllUsers();
+    public String getAllUsers(){
+        return userService.getAllUsersInfo();
     }
 
     @GetMapping("/{id}")
@@ -39,9 +40,9 @@ public class UserController {
         return userService.updateUser(id, user.getName(), user.getPassportData());
     }
 
-    @PostMapping("/{id}/numbers")
-    public boolean addNumber(@PathVariable Long id, @RequestBody Number number){
-        return userService.addNumberForUser(id, number);
+    @PostMapping("/{id}/numbers/{numberStr}")
+    public boolean addNumber(@PathVariable("id") Long id, @PathVariable("numberStr") String numberStr){
+        return userService.addNumberForUser(id, numberStr);
     }
 
     @PutMapping("/{userId}/bookings/{bookingId}")
@@ -50,8 +51,18 @@ public class UserController {
     }
 
     @GetMapping("/{userId}/bookings/{bookingId}")
-    public void findUserBookingById(@PathVariable Long userId, @PathVariable Long bookingId){
-        userService.findUserBookingById(userId, bookingId);
+    public String  findUserBookingById(@PathVariable Long userId, @PathVariable Long bookingId){
+        return userService.findUserBookingById(userId, bookingId).toString();
+    }
+
+    @GetMapping("/{userId}/bookings")
+    public String getAllUserBookings(@PathVariable Long userId){
+        return userService.getAllUserBookings(userId);
+    }
+
+    @GetMapping("/{userId}/numbers")
+    public List<Number> getAllUsersNumbers(@PathVariable Long userId){
+        return userService.getAllUsersNumbers(userId);
     }
 //    @PostMapping("/{id}/numbers/{numberId}")
 //    public boolean removeNumber(@PathVariable Long id, @PathVariable Long numberId){

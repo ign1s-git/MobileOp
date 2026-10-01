@@ -1,7 +1,7 @@
 package org.mobileOp.controllers;
 
 import org.mobileOp.Objects.Plan;
-import org.mobileOp.Objects.PlanService;
+import org.mobileOp.services.PlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -27,6 +27,9 @@ public class Main {
         AnnotationConfigWebApplicationContext appCtx = new AnnotationConfigWebApplicationContext();
         appCtx.register(AppConfig.class);
 
+        // Refresh context to initialize JPA/Hibernate
+        appCtx.refresh();
+
         // Register Spring DispatcherServlet
         DispatcherServlet dispatcherServlet = new DispatcherServlet(appCtx);
         Tomcat.addServlet(ctx, "dispatcher", dispatcherServlet);
