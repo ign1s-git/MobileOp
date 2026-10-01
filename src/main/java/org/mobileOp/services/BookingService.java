@@ -9,10 +9,10 @@ import org.mobileOp.enums.BookingStatus;
 import org.mobileOp.repositories.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-
-import static org.antlr.v4.runtime.tree.xpath.XPath.findAll;
 
 @RequiredArgsConstructor
 @Service
@@ -21,48 +21,65 @@ public class BookingService {
     @Autowired
     private BookingRepository bookingRepository;
 
+    @Autowired
+    private NumberService numberService;
+
     @Getter
     private final UserService userService;
 
-    public void bookingNumber(Number number, User user) {
-        if (user.getBookingRequests().size() < 10) {
-            Booking bookingsRequests = new Booking((long)user.getBookingRequests().size() + 1, user, number, BookingStatus.IN_PROGRESS, LocalDate.now());
-            bookingRepository.save(bookingsRequests);
+    public String bookingNumber(String numberStr, Long userId) {
+        User user = userService.findUserById(userId);
+        Number number = numberService.getNumberByNumber(numberStr);
+        if (user != null && number != null) {
+            if (user.getBookingRequests().size() < 10) {
+                Booking bookingRequests = new Booking(user, number, BookingStatus.IN_PROGRESS, LocalDate.now());
+                bookingRepository.save(bookingRequests);
+                return "Booking is created!";
+            }
+            return "Booking limit reached!";
         }
+        return "User or number not found!";
     }
 
-    public Booking findBookingById(Long bookingId){
+    public Booking findBookingById(Long bookingId) {
         return bookingRepository.findById(bookingId).orElse(null);
     }
 
-    public void cancelRequest(Long bookingId, Long userId) {
+    public void expireBooking(Long bookingId, Long userId) {
         Booking booking = findBookingById(bookingId);
         User user = userService.findUserById(userId);
         LocalDate now = LocalDate.now();
         if (ChronoUnit.DAYS.between(booking.getBookedAt(), now) >= (Booking.DEFAULT_BOOKING_DAYS + booking.getExtensionDays())) {
+            booking.setBookingStatus(BookingStatus.EXPIRED);
+            bookingRepository.save(booking);
             user.getBookingRequests().remove(booking);
         }
     }
 
-    public Booking completeBooking(Booking booking, User user){
-        if(user.addNumber(booking.getNumber())){
-            booking.setBookingStatus(BookingStatus.COMPLETED);
-            return bookingRepository.save(booking);
+    public String completeBooking(Long userId, Long bookingId) {
+        User user = userService.findUserById(userId);
+        Booking booking = findBookingById(bookingId);
+        if (user != null && booking != null) {
+            if (user.addNumber(booking.getNumber())) {
+                booking.setBookingStatus(BookingStatus.COMPLETED);
+                bookingRepository.save(booking);
+                return "Booking is completed!";
+            }
         }
-        return null;
+        return "Booking is not completed!";
     }
 
-    public Booking bookingRenew(Long bookingId, int days){
+    public String bookingRenew(Long bookingId, int days) {
         Booking booking = findBookingById(bookingId);
         if (booking != null) {
             booking.bookingRenewal(days);
-            return bookingRepository.save(booking) ;
+            bookingRepository.save(booking);
+            return "Booking is renewed!";
         }
-        return null;
+        return "Booking is not renewed!";
     }
 
     public String getAllBookingsInfo() {
-
         return bookingRepository.findAll().toString();
     }
 }

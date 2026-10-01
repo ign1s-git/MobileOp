@@ -1,5 +1,6 @@
 package org.mobileOp.services;
 
+import org.mobileOp.Objects.Booking;
 import org.mobileOp.Objects.Number;
 import org.mobileOp.Objects.User;
 import org.mobileOp.repositories.UserRepository;
@@ -13,6 +14,8 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private NumberService numberService;
 
     public UserService() {
     }
@@ -40,13 +43,18 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public String getAllUsersInfo() {
+        return userRepository.findAll().toString();
+    }
+
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
 
-    public boolean addNumberForUser(Long id, Number number) {
-        if (this.findUserById(id) != null) {
-            this.findUserById(id).addNumber(number);
+    public boolean addNumberForUser(Long id, String numberStr) {
+        if (this.findUserById(id) != null && numberService.getNumberByNumber(numberStr) != null) {
+            this.findUserById(id).addNumber(numberService.getNumberByNumber(numberStr));
+            userRepository.save(this.findUserById(id));
             return true;
         }
         return false;
@@ -57,8 +65,18 @@ public class UserService {
         user.cancelUserBooking(bookingId);
     }
 
-    public void findUserBookingById(Long userId, Long bookingId) {
+    public String findUserBookingById(Long userId, Long bookingId) {
         User user  = findUserById(userId);
-        user.findBookingById(bookingId);
+        return user.findBookingById(bookingId).toString();
+    }
+
+    public String getAllUserBookings(Long userId) {
+        User user = findUserById(userId);
+        return user.usersAllBooking().toString();
+    }
+
+    public List<Number> getAllUsersNumbers(Long userId) {
+        User user = findUserById(userId);
+        return user.usersAllNumbers();
     }
 }

@@ -33,15 +33,15 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Booking> bookingRequests = new ArrayList<>();
 
-    public User(Long id, String name, String passportData, List<org.mobileOp.Objects.Number> numbers, List<Booking> bookingsRequests) {
+    public User(Long id, String name, String passportData, List<Number> numbers, List<Booking> bookingRequests) {
         this.id = id;
         this.name = name;
         this.passportData = passportData;
         this.numbers = numbers;
-        this.bookingRequests = bookingsRequests;
+        this.bookingRequests = bookingRequests;
     }
 
-    public User(Long id,String name, String passportData) {
+    public User(Long id, String name, String passportData) {
         this.id = id;
         this.name = name;
         this.passportData = passportData;
@@ -54,19 +54,19 @@ public class User {
         booking.setBookingStatus(BookingStatus.CANCELLED);
     }
 
-    public Booking findBookingById(Long bookingId){
+    public Booking findBookingById(Long bookingId) {
         List<Booking> bookings = getBookingRequests();
         for (Booking b : bookings) {
-            if(b.getId().equals(bookingId)){
+            if (b.getId().equals(bookingId)) {
                 return b;
             }
         }
         return null;
     }
 
-    public boolean changePlan (String number, Plan plan){
+    public boolean changePlan(String number, Plan plan) {
         for (org.mobileOp.Objects.Number n : this.numbers) {
-            if (n.getNumber().equals(number)){
+            if (n.getNumber().equals(number)) {
                 plan.setStartDate(LocalDateTime.now());
                 n.setPlan(plan);
                 return true;
@@ -75,21 +75,25 @@ public class User {
         return false;
     }
 
-    public boolean addNumber(Number number){
-        if (this.numbers.size() <= 3){
+    public boolean addNumber(Number number) {
+        if (this.numbers.size() < 3) {
             this.numbers.add(number);
             return true;
         }
         return false;
     }
 
-    public void removeNumber(Number number) {
-
-        this.numbers.remove(number);
+    public List<Booking> usersAllBooking(){
+        return this.bookingRequests;
     }
 
+    public List<Number> usersAllNumbers(){
+        return this.numbers;
+    }
 
-
+    public void removeNumber(Number number) {
+        this.numbers.remove(number);
+    }
 
     @Override
     public String toString() {

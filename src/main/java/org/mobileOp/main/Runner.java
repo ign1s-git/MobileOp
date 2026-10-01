@@ -29,9 +29,9 @@ public class Runner {
         User user = userService.createUser("Lily", "AA12345");
         User user1 = userService.createUser("Bob", "AA55271");
 
-        bookingService.bookingNumber(number2, user1);
-        bookingService.bookingNumber(number3, user);
-        bookingService.bookingNumber(number1, user);
+        //bookingService.bookingNumber(number2, user1);
+        //bookingService.bookingNumber(number3, user);
+        //bookingService.bookingNumber(number1, user);
 
         System.out.println("User booking requests: " + user.getBookingRequests());
         System.out.println("Free numbers: " + numberService.getFreeNumbers());

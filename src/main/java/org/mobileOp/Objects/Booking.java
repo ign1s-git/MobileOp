@@ -17,9 +17,9 @@ public class Booking {
     public static final int DEFAULT_BOOKING_DAYS = 3;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonIgnoreProperties("bookingRequests")
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -56,17 +56,28 @@ public class Booking {
         this.bookingStatus = bookingStatus;
         this.bookedAt = bookedAt;
     }
-    
+
+    public Booking( User user, Number number, BookingStatus bookingStatus, LocalDate bookedAt) {
+        this.user = user;
+        this.number = number;
+        this.bookingStatus = bookingStatus;
+        this.bookedAt = bookedAt;
+    }
+
     @Override
     public String toString() {
-        return "Booking Id: " + id + ", User: " + user.getName() + ", User id: " + user.getId() +
-                ", Number: " + number.getNumber() + ", Status: " + bookingStatus +
+        String userName = (user != null) ? user.getName() : "null";
+        String userId = (user != null) ? String.valueOf(user.getId()) : "null";
+        String numberStr = (number != null) ? number.getNumber() : "null";
+        return "Booking Id: " + id + ", User: " + userName + ", User id: " + userId +
+                ", Number: " + numberStr + ", Status: " + bookingStatus +
                 ", Date: " + bookedAt;
     }
 
-    public boolean bookingRenewal(int days){
-        if(this.bookingStatus != BookingStatus.COMPLETED) {
+    public boolean bookingRenewal(int days) {
+        if (this.bookingStatus != BookingStatus.COMPLETED) {
             this.extensionDays = days;
+            this.expiresAt = this.expiresAt.plusDays(days);
             return true;
         }
         return false;
