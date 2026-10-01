@@ -1,21 +1,22 @@
 package mobileOp;
 
+import mobileOp.Enums.BookingStatus;
+
 import java.time.LocalDate;
 
 public class Booking {
     private int id;
-    private mobileOp.User user;
+    private User user;
     private Number number;
-    // private Plan plan;
-    private mobileOp.Enums.BookingStatus bStatus;
+    private BookingStatus bStatus;
     private LocalDate bookedAt;
     private LocalDate expiresAt;
+    private int dayCounts = 3;
 
-    public Booking(int id, User user, Number number, mobileOp.Enums.BookingStatus bStatus, LocalDate bookedAt, LocalDate expiresAt) {
+    public Booking(int id, User user, Number number, BookingStatus bStatus, LocalDate bookedAt, LocalDate expiresAt) {
         this.id = id;
         this.user = user;
         this.number = number;
-        // this.plan = plan;
         this.bStatus = bStatus;
         this.bookedAt = bookedAt;
         this.expiresAt = expiresAt;
@@ -25,60 +26,46 @@ public class Booking {
         this.id = id;
         this.user = user;
         this.number = number;
-        // this.plan = plan;
         this.bStatus = bStatus;
         this.bookedAt = bookedAt;
     }
-
-    public int getId() {
-        return id;
+    @Override
+    public String toString() {
+        return "Booking Id: " + id + ", User: " + user.getName() + ", User id: " + user.getId() +
+                ", Number: " + number.getNumber() + ", Status: " + bStatus +
+                ", Date: " + bookedAt;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public boolean bookingRenewal(int days){
+        this.dayCounts += days;
+        return true;
     }
 
-    public User getUser() {
-        return user;
-    }
+    public int getId() { return id; }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+    public void setId(int id) { this.id = id; }
 
-    public Number getNumber() {
-        return number;
-    }
+    public User getUser() { return user; }
 
-    public void setNumber(Number number) {
-        this.number = number;
-    }
+    public void setUser(User user) { this.user = user; }
 
-    //    public Plan getPlan() { return plan; }
-    //
-    //    public void setPlan(Plan plan) { this.plan = plan; }
+    public Number getNumber() { return number; }
 
-    public mobileOp.Enums.BookingStatus getbStatus() {
-        return bStatus;
-    }
+    public void setNumber(Number number) { this.number = number; }
 
-    public void setbStatus(mobileOp.Enums.BookingStatus bStatus) {
-        this.bStatus = bStatus;
-    }
+    public mobileOp.Enums.BookingStatus getbStatus() { return bStatus; }
 
-    public LocalDate getBookedAt() {
-        return bookedAt;
-    }
+    public void setbStatus(mobileOp.Enums.BookingStatus bStatus) { this.bStatus = bStatus; }
 
-    public void setBookedAt(LocalDate bookedAt) {
-        this.bookedAt = bookedAt;
-    }
+    public LocalDate getBookedAt() { return bookedAt; }
 
-    public LocalDate getExpiresAt() {
-        return expiresAt;
-    }
+    public void setBookedAt(LocalDate bookedAt) { this.bookedAt = bookedAt; }
 
-    public void setExpiresAt(LocalDate expiresAt) {
-        this.expiresAt = expiresAt;
-    }
+    public LocalDate getExpiresAt() { return expiresAt; }
+
+    public void setExpiresAt(LocalDate expiresAt) { this.expiresAt = expiresAt; }
+
+    public int getDayCounts() { return dayCounts; }
+
+    public void setDayCounts(int dayCounts) { this.dayCounts = dayCounts; }
 }
