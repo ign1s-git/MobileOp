@@ -1,5 +1,5 @@
 package mobileOp.Enums;
 
 public enum BookingStatus {
-    IN_PROGRESS, COMPLETED
+    InProgress, Completed
 }
