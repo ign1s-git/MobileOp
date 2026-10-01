@@ -7,16 +7,16 @@ import java.time.LocalDateTime;
 public class Plan {
     private PlanType type;
     private LocalDateTime startDate;
-    private LocalDateTime endDate;
-    private int payment;
-    private int dayCount;
+    private LocalDateTime EndDate;
+    private int Payment;
+    private int DayCount;
 
-    public Plan(PlanType type, LocalDateTime startDate, int payment, int dayCount) {
+    public Plan(PlanType type, LocalDateTime startDate, int Payment, int DayCount) {
         this.type = type;
         this.startDate = startDate;
-        this.endDate = startDate.plusDays(dayCount) ;
-        this.payment = payment;
-        this.dayCount = dayCount;
+        this.EndDate = startDate.plusDays(DayCount) ;
+        this.Payment = Payment;
+        this.DayCount = DayCount;
     }
 
     public PlanType getType() { return type; }
@@ -27,16 +27,16 @@ public class Plan {
 
     public void setStartDate(LocalDateTime startDate) { this.startDate = startDate; }
 
-    public LocalDateTime getEndDate() { return endDate; }
+    public LocalDateTime getEndDate() { return EndDate; }
 
-    public void setEndDate(LocalDateTime endDate) { this.endDate = endDate; }
+    public void setEndDate(LocalDateTime endDate) { EndDate = endDate; }
 
-    public int getPayment() { return payment; }
+    public int getPayment() { return Payment; }
 
-    public void setPayment(int payment) { this.payment = payment; }
+    public void setPayment(int payment) { Payment = payment; }
 
-    public int getDayCount() { return dayCount; }
+    public int getDayCount() { return DayCount; }
 
-    public void setDayCount(int dayCount) { this.dayCount = dayCount; }
+    public void setDayCount(int dayCount) { DayCount = dayCount; }
 
 }
